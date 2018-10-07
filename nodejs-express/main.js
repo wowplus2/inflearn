@@ -2,10 +2,20 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const qs = require('querystring');
+const bodyParser = require('body-parser');
+const compression = require('compression');
 const sanitizeHtml = require('sanitize-html');
 const template = require('./lib/template.js');
 
 const app = express();
+
+// parse from application/x-www-form-urlencoded request
+app.use(bodyParser.urlencoded({extended: false}));
+// parse from application/json request
+//app.use(bodyParser.json());
+
+app.use(compression());
+
 
 app.get('/', (req, res) => {
   fs.readdir('./node_modules', (error, fields) => {
@@ -70,6 +80,16 @@ app.get('/create', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
+  let post = req.body;
+  let title = post.title;
+  let desc = post.desc;
+
+  fs.writeFile(`data/${title}`, desc, 'utf8', err => {
+    //res.writeHead(302, { Location: `/page/${title}` });
+    //res.end();
+    res.redirect(`/page/${title}`);
+  });
+  /*
   let body = '';
   req.on('data', data => {
     body = body + data;
@@ -86,6 +106,7 @@ app.post('/create', (req, res) => {
       res.redirect(`/page/${title}`);
     });
   });
+  */
 });
 
 app.get('/update/:pageId', (req, res) => {
@@ -112,6 +133,19 @@ app.get('/update/:pageId', (req, res) => {
 });
 
 app.post('/update', (req, res) => {
+  let post = req.body;
+  let id = post.id;
+  let title = post.title;
+  let desc = post.desc;
+
+  fs.rename(`data/${id}`, `data/${title}`, err => {
+    fs.writeFile(`data/${title}`, desc, 'utf8', err => {
+      //res.writeHead(302, { Location: `/page/${title}` });
+      //res.end();
+      res.redirect(`/page/${title}`);
+    });
+  });
+  /*
   let body = '';
   req.on('data', data => {
     body = body + data;
@@ -131,11 +165,21 @@ app.post('/update', (req, res) => {
       });
     });
   });
+  */
 });
 
 app.post('/delete', (req, res) => {
-  let body = '';
+  let post = req.body;
+  let id = post.id;
+  let filteredId = path.parse(id).base;
 
+  fs.unlink(`data/${filteredId}`, error => {
+    //res.writeHead(302, { Location: `/` });
+    //res.end();
+    res.redirect('/');
+  });
+  /*
+  let body = '';
   req.on('data', data => {
     body = body + data;
   });
@@ -151,6 +195,7 @@ app.post('/delete', (req, res) => {
       res.redirect('/');
     });
   });
+  */
 });
 
 app.listen(3000, () => {
