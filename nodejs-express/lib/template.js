@@ -1,5 +1,5 @@
 module.exports = {
-  HTML: function(title, list, body, control) {
+  HTML: function(title, list, body, control, authStatusUi) {
     return `
       <!doctype html>
       <html>
@@ -8,8 +8,24 @@ module.exports = {
         <meta charset="utf-8">
       </head>
       <body>
+        ${authStatusUi}
         <h1><a href="/">WEB</a></h1>
         ${list}
+        ${control}
+        ${body}
+      </body>
+      </html>
+      `;
+  },
+  LOGIN: function(title, body, control) {
+    return `
+      <!doctype html>
+      <html>
+      <head>
+        <title>WEB1 - ${title}</title>
+        <meta charset="utf-8">
+      </head>
+      <body>
         ${control}
         ${body}
       </body>

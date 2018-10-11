@@ -17,6 +17,7 @@ router.get('/create', (req, res, next) => {
             <p><textarea name="desc" placeholder="Description"></textarea></p>
             <p><input type="submit" /></p>
           </form>`,
+    '',
     ''
   );
   res.send(html);
@@ -91,7 +92,8 @@ router.get('/update/:pageId', (req, res, next) => {
             <p><textarea name="desc" placeholder="Description">${desc}</textarea></p>
             <p><input type="submit" value="update" /></p>
         </form>`,
-        `<a href="/topic/create">create</a> <a href="/topic/update/${title}">update</a>`
+        `<a href="/topic/create">create</a> <a href="/topic/update/${title}">update</a>`,
+        ``
       );
       res.send(html);
     }
@@ -116,11 +118,12 @@ router.get('/:pageId', (req, res, next) => {
         list,
         `<h2>${sanitizedTitle}</h2>${sanitizedDesc}`,
         `<a href="/topic/create">create</a>
-                <a href="/topic/update/${sanitizedTitle}">update</a>
-                <form action="/topic/delete" method="post">
-                    <input type="hidden" name="id" value="${sanitizedTitle}" />
-                    <input type="submit" value="delete" />
-                </form>`
+        <a href="/topic/update/${sanitizedTitle}">update</a>
+        <form action="/topic/delete" method="post">
+            <input type="hidden" name="id" value="${sanitizedTitle}" />
+            <input type="submit" value="delete" />
+        </form>`,
+        ``
       );
       res.send(html);
     }

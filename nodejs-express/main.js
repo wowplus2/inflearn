@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const helmet = require('helmet');
+const cookie = require('cookie');
 
 /* Middleware Setting ----------------------------------------------------- */
 app.use(helmet());
@@ -21,6 +22,16 @@ app.get('*', (req, res, next) => {
     next();
   });
 });
+
+function authIsOwner(req, res, next) {
+  let cookies = {};
+
+  if (req.headers.cookie) {
+    cookies = cookie.parse(req.headers.cookie);
+  }
+
+  return typeof cookies.email == 'undefined' ? res.redirect('/login') : next();
+}
 /* ------------------------------------------------------------------------ */
 
 /* Define Routers -------------------------------------------------------- */
@@ -28,7 +39,7 @@ const root = require('./routes/root');
 const topics = require('./routes/topic');
 
 app.use('/', root);
-app.use('/topic', topics);
+app.use('/topic', authIsOwner, topics);
 /* ------------------------------------------------------------------------ */
 
 /* Error Handling --------------------------------------------------------- */
