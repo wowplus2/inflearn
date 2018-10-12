@@ -1,0 +1,438 @@
+CSS3 소개
+3.1 _ CSS2와 CSS3의 차이점
+3.2 _ CSS3 브라우저 지원현황
+3.2.1 _ 12가지 유용한 CSS3 속성들
+3.2.2 _ 42가지 CSS3 선택자들
+3.3 CSS3 실전 적용
+3.3.1 _ text-shadow
+3.3.2 _ text-overflow
+3.3.3 _ word-wrap
+3.3.4 _ @font-face
+3.3.5 _ opacity
+3.3.6 _ box-shadow
+3.3.7 _ border-radius
+3.3.8 _ background(s)
+3.3.9 _ gradient
+3.3.10 _ transform
+3.3.11 _ transition
+3.3.12 _ animation
+3.4 _ CSS3 명세 읽는 법
+3.5 _ CSS3 FAQ
+3.5.1 _ CSS3는 언제 지원 되나?
+3.5.2 _ CSS3를 사용하면 이를 잘 지원하지 못하는 하위 버전 브라우저를 선택한 사용자를 차별하는 것이 아닌가?
+3.5.3 _ CSS3를 사용하면 CSS 문법 유효성 검사를 만족할 수 없지 않나?
+3.5.4 _ CSS3의 명세를 지금부터 공부해야 하나?
+3.5.5 _ CSS3 명세가 갑자기 바뀌면 어떻게 하나?
+3.5.6 _ CSS3 명세를 보면서 공부했지만 대부분의 브라우저들이 지원하지 않는것 같다.
+3.5.7 _ 우리 고객들은 IE 브라우저에서도 CSS3 기법들이 적용되길 원한다.
+3.6 _ 참고자료
+3.1 _ CSS2와 CSS3의 차이점
+CSS2와 CSS3의 가장 큰 차이점은 CSS3가 모듈 기반으로 개발되고 있다는 점이다. 이것은 각종 브라우저나 디바이스가 필요에 따라 원하는 CSS 모듈만을 탑재하거나 또는 필요한 모듈만을 빠르게 자주 업데이트 하는 것을 돕는다. CSS3는 text, fonts, color, backgrounds & borders, transforms, transitions, animaitons와 같은 종류의 모듈들을 추가로 개발하고 있다. CSS3는 기존의 CSS2가 갖지 못했던 화려하고 역동적인 면모를 추가하여 포토샵과 자바스크립트 및 서버측 기술에만 완전히 의존하던 영역들을 개척했다. 상자의 크기에 따른 말줄임 표시, 투명한 배경, 그림자 효과, 둥근 모서리, 그라디언트, 도형의 회전과 비틀기, 애니메이션 효과 등이 가능해진 것이다. 특히 그래픽 디자인에만 의존하던 영역이 CSS3만으로도 상당부분 가능해지면서 웹 사이트의 성능 향상에 크게 기여할 수 있게 되었다.
+
+3.2 _ CSS3 브라우저 지원현황
+IE 10~11을 포함하여 최신 버전의 Chrome, Safari, Firefox, Opera는 아래 속성을 모두 지원한다. IE 브라우저의 경우 -ms-filter는 9 버전까지만 지원하고 있다. 자세한 내용은 http://caniuse.com/ 참고.
+
+3.2.1 _ 12가지 유용한 CSS3 속성들
+12 Useful CSS3 PropertiesIE:Internet Explorer
+Module	Properties	IE 11	IE 10	IE 9	IE 8	IE 7	IE 6	Fallback for IE 6, 7, 8
+text	text-shadow	yes	yes	yes / filter	yes / filter	yes / filter	yes / filter	DropShadow Filter
+text-overflow	yes	yes	yes	yes	yes	yes	 
+word-wrap	yes	yes	yes	yes	yes	yes	 
+fonts	@font-face	yes	yes	yes	yes	yes	yes	IE를 위한 'eot' 포멧 필요
+color	opacity	yes	yes	yes	yes / filter	yes / filter	yes / filter	Alpha Filter
+backgrounds & borders	box-shadow	yes	yes	yes	yes / filter	yes / filter	yes / filter	Shadow Filter
+border-radius	yes	yes	yes	no	no	no	 
+background(s)	yes	yes	yes	no	no	no	 
+gradient	yes	yes	yes / filter	yes / filter	yes / filter	yes / filter	Gradient Filter
+transforms	transform	yes	yes	yes	yes / filter	yes / filter	yes / filter	Matrix Filter
+transitions	transition	yes	yes	no	no	no	no	 
+animations	animation	yes	yes	no	no	no	no	 
+한편 fetchak.com은 ie-css3.htc(11.8KB) 파일을 사용하여 IE 6~8 브라우저에서 text-shadow, box-shadow, border-radius 렌더링을 흉내내는 스크립트를 제안하고 있다. 이 스크립트를 사용하면 IE 브라우저에서도 border-radius 표현이 가능해지고 text-shadow, box-shadow 표현은 더욱 풍부해 진다. 이 스크립트를 사용하면 DropShadow, Shadow filter를 사용할 필요가 없다. htc 포멧은 IE 브라우저에서만 기능하는 벤더 확장 자바스크립트 파일이다. 하지만 페이지 로딩 속도와 렌더링 성능을 떨어뜨리기 때문에 넣지 않을 것을 권장한다.
+
+3.2.2 _ 42가지 CSS3 선택자들
+42 CSS3 SelectorsIE:Internet Explorer
+CSS level	Selectors	IE 11	IE 10	IE 9	IE 8	IE 7	IE 6	Meaning
+CSS3	E[attr^=val]	yes	yes	yes	yes	yes	no	'attr' 속성의 값이 'val'으로 시작하는 요소를 선택
+E[attr$=val]	yes	yes	yes	yes	yes	no	'attr' 속성의 값이 'val'으로 끝나는 요소를 선택
+E[attr*=val]	yes	yes	yes	yes	yes	no	'attr' 속성의 값에 'val'이 포함되는 요소를 선택
+E:root	yes	yes	yes	no	no	no	문서의 최상위 요소(html)를 선택
+E:nth-child(n)	yes	yes	yes	no	no	no	앞으로부터 지정된 순서와 일치하는 요소가 E 라면 선택(E 아닌 요소의 순서가 계산에 포함됨)
+E:nth-last-child(n)	yes	yes	yes	no	no	no	뒤로부터 지정된 순서와 일치하는 요소가 E 라면 선택(E 아닌 요소의 순서가 계산에 포함됨)
+E:nth-of-type(n)	yes	yes	yes	no	no	no	E 요소 중 앞으로부터 순서가 일치하는 E 요소를 선택(E 요소의 순서만 계산에 포함됨)
+E:nth-last-of-type(n)	yes	yes	yes	no	no	no	E 요소 중 끝으로부터 순서가 일치하는 E 요소를 선택(E 요소의 순서만 계산에 포함됨)
+E:last-child	yes	yes	yes	no	no	no	마지막에 등장하는 요소가 E 라면 선택(E 아닌 요소의 순서가 계산에 포함됨)
+E:first-of-type	yes	yes	yes	no	no	no	E 요소 중 첫 번째 E를 선택(E 요소의 순서만 계산에 포함됨)
+E:last-of-type	yes	yes	yes	no	no	no	E 요소 중 마지막 E를 선택(E 요소의 순서만 계산에 포함됨)
+E:only-child	yes	yes	yes	no	no	no	E 요소가 유일한 자식이면 선택(E 아닌 요소가 하나라도 포함되면 선택 안함)
+E:only-of-type	yes	yes	yes	no	no	no	E 요소가 유일한 타입이면 선택(E 아닌 요소가 포함되어도 E 타입이 유일하면 선택)
+E:empty	yes	yes	yes	no	no	no	텍스트 및 공백을 포함하여 자식 요소가 없는 E를 선택
+E:target	yes	yes	yes	no	no	no	E의 URI가 요청되면 선택(따라서 E는 ID가 지정되어 있어야 한다)
+E:enabled	yes	yes	yes	no	no	no	사용 가능한 폼 콘트롤(input, textarea, select, button) E를 선택
+E:disabled	yes	yes	yes	no	no	no	사용 불가능한 폼 콘트롤(input, textarea, select, button) E를 선택
+E:checked	yes	yes	yes	no	no	no	선택된 폼 콘트롤(input checked="checked")을 선택
+E:not(s)	yes	yes	yes	no	no	no	S가 아닌 E 요소를 선택
+E~F	yes	yes	yes	yes	yes	no	E 요소가 앞에 존재하면 F를 선택(E가 F보다 먼저 등장하지 않으면 선택 안함)
+CSS2	*	yes	yes	yes	yes	yes	yes	모든 요소를 선택
+E[attr]	yes	yes	yes	yes	yes	no	'attr' 속성이 포함된 요소 E를 선택
+E[attr=val]	yes	yes	yes	yes	yes	no	'attr' 속성의 값이 정확하게 'val'과 일치하는 요소 E를 선택
+E[attr~=val]	yes	yes	yes	yes	yes	no	'attr' 속성의 값에 'val'이 포함되는 요소를 선택(공백으로 분리된 값이 일치해야 한다)
+E[attr|=val]	yes	yes	yes	yes	yes	no	'attr' 속성의 값이 정확하게 'val' 이거나 또는 'val-' 으로 시작되는 요소 E를 선택
+E:first-child	yes	yes	yes	yes	yes	no	첫 번째 등장하는 요소가 E 라면 선택(E 아닌 요소의 순서가 계산에 포함됨)
+E:lang(en)	yes	yes	yes	yes	no	no	HTML lang 속성의 값이 'en'으로 지정된 요소를 선택
+E:before	yes	yes	yes	yes	no	no	E 요소의 시작 지점에 생성된 요소를 선택
+E:after	yes	yes	yes	yes	no	no	E 요소의 끝 지점에 생성된 요소를 선택
+E>F	yes	yes	yes	yes	yes	no	E 요소의 자식인 F 요소를 선택
+E+F	yes	yes	yes	yes	yes	no	E 요소를 뒤따르는 F 요소를 선택(E와 F 사이에 다른 요소가 존재하면 선택 안함)
+CSS 1	E	yes	yes	yes	yes	yes	yes	E 요소를 선택
+E:link	yes	yes	yes	yes	yes	yes	방문하지 않은 앵커 E를 선택
+E:visited	yes	yes	yes	yes	yes	yes	방문한 앵커 E를 선택
+E:hover	yes	yes	yes	yes	yes	yes	E 요소에 마우스가 올라가 있는 동안 E를 선택
+E:active	yes	yes	yes	yes	yes	yes	E 요소에 마우스 클릭 또는 키보드 엔터가 눌린 동안 E를 선택
+E:focus	yes	yes	yes	yes	yes	yes	E 요소에 포커스가 머물러 있는 동안 E를 선택
+E:first-line	yes	yes	yes	yes	yes	no	E 요소의 첫 번째 라인을 선택
+E:first-letter	yes	yes	yes	yes	yes	no	E 요소의 첫 번째 문자를 선택
+.class	yes	yes	yes	yes	yes	yes	클래스 이름이 class로 지정된 요소 선택
+#id	yes	yes	yes	yes	yes	yes	아이디 이름이 id로 지정된 요소 선택
+E F	yes	yes	yes	yes	yes	yes	E 요소의 자손인 F 요소를 선택
+한편 Keith Clark 이라는 웹 개발자는 IE 5.5~8 버전의 브라우저에서 CSS3의 모든 가상 클래스 선택자를 사용할 수 있도록 ie-css3.js 라는 자바스크립트 라이브러리를 제작 MIT라이선스 형태(무료)로 배포하고 있다.
+
+3.3 _ CSS3 실전 적용
+3.3.1 _ text-shadow
+text-shadow
+
+text-shadow
+
+filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=5, OffY=5, Color=#cccccc, Positive=true);
+text-shadow:5px 5px 0 #ccc;
+display:inline-block;
+zoom:1;
+text-shadow:x_offset y_offset blur_radius color
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러6~11
+
+IE 브라우저를 제외한 모든 브라우저가 이미 text-shadow 속성을 지원하고 있다. blur 값은 생략할 수 있는데 생략하는 경우 기본값은 blur 스타일이 전혀 지정되지 않은 '0'이다. IE는 DropShadow Filter를 사용할 수 있지만 그림자의 blur 값이 '0'과 같은 표현으로 처리되고 blur 값을 지정할 수 없는 단점이 있다. IE 브라우저 버전간 호환(버그 해결)을 위해 display 속성을 block 또는 inline-block 으로 지정하고 zoom:1 속성을 추가로 부여해야 한다.
+
+문법
+Name:	text-shadow
+Value:	none | [ <color>? <length> <length> <length>? | <length> <length> <length>? <color>? ]
+Initial:	none
+Applies to:	all elements and generated content
+Inherited:	yes
+Percentages:	N/A
+Media:	visual
+Computed value:	a color plus three absolute <length>s
+CSS Text Level 3 › text-shadow - http://www.w3.org/TR/css3-text/#text-shadow
+MSDN › DropShadow Filter - http://msdn.microsoft.com/en-us/library/ms532985(VS.85).aspx
+3.3.2 _ text-overflow
+무궁화 꽃이 피었습니다.
+
+무궁화 꽃이 피었습니다.
+
+text-overflow:ellipsis;
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러6~11
+
+IE는 이미 IE 6 버전부터 지원하고 있다. Firefox 브라우저는 7.0 버전(2010-09-28) 부터 지원하기 시작했다. 이 속성은 display 속성이 inline-block 또는 block을 지닌 요소에 적용할 수 있다. white-space:nowarp; overflow:hidden 속성을 함께 사용해야 한다.
+
+문법
+Name:	text-overflow
+Value:	clip | ellipsis | <string>
+Initial:	clip
+Applies to:	block-level, inline-block elements and table cells
+Inherited:	no
+Percentages:	N/A
+Media:	visual
+Computed value:	as specified
+CSS Text Level 3 › text-overflow - http://dev.w3.org/csswg/css3-text/#text-overflow
+3.3.3 _ word-wrap
+http://abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.com
+
+http://abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.com
+
+word-wrap:break-word;
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러6~11
+
+1byte 문자열이 공백 없이 등장하는 경우 모든 브라우저들은 이를 하나의 단어로 해석하기 때문에 개행하지 않는다. 이것을 강제로 개행할 수 있다. 모든 브라우저가 이 속성을 지원한다.
+
+문법
+Name:	word-wrap
+Value:	normal | break-word
+Initial:	normal
+Applies to:	all elements
+Inherited:	yes
+Percentages:	N/A
+Media:	visual
+Computed value:	specified value
+CSS Text Level 3 › word-wrap - http://www.w3.org/TR/css3-text/#word-wrap
+3.3.4 _ @font-face
+The quick brown fox jumps over the lazy dog.
+이 문서의 기본 글꼴은 나눔고딕 입니다.
+0123456789
+
+@font-face{ font-family:NG; src:url(NanumGothic.eot); src:local(※), url(NanumGothic.woff) format('woff');}
+body, table, input, textarea, select, button{font-family:NanumGothic, 나눔고딕, NG, Tahoma, Geneva, sans-serif;}
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러6~11
+
+woff 파일과 eot 파일을 함께 준비한다. IE 9과 비 IE 브라우저는 woff, otf, ttf 포멧을 지원하지만 eot 포멧을 지원하지 않는다. 반면 IE 6~8 브라우저는 eot 포멧만 지원하기 때문에 두 가지 포멧이 모두 필요하다. 나눔고딕 글꼴을 이미 설치한 사용자는 웹 폰트를 내려받지 않고 로컬 글꼴을 사용할 수 있도록 NanumGothic을 먼저 선언한다. 나눔고딕 글꼴(웹 폰트) 내려받기 NanumGothic.woff(982KB) | NanumGothic.eot(745KB) | NanumGothic.ttf(2.23MB) ttf 포멧은 용량이 매우 무겁기 때문에 웹 폰트로 사용하는 것은 권장하지 않는다.
+
+font-family 문법
+Name:	font-family
+Value:	<family-name>
+Initial:	N/A
+src 문법
+Name:	src
+Value:	[ <uri> [format(<string> [, <string>]*)] | <font-face-name> ] [, <uri> [format(<string> [, <string>]*)] | <font-face-name> ]*
+Initial:	N/A
+CSS Fonts Module Level 3 › @font-face - http://www.w3.org/TR/css3-fonts/#the-font-face-rule
+3.3.5 _ opacity
+filter:alpha(opacity=50);
+opacity:0.5;
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러6~11
+
+IE 6~8 브라우저를 제외한 모든 브라우저가 이미 opacity 속성을 지원하고 있다. IE 6~8 브라우저는 MS전용 Alpha Filter를 적용하여 동일한 표현이 가능하다.
+
+문법
+Name:	opacity
+Value:	<alphavalue> | inherit
+Initial:	1
+Applies to:	all elements
+Inherited:	no
+Percentages:	N/A
+Media:	visual
+Computed value:	The same as the specified value after clipping the <alphavalue> to the range [0.0,1.0].
+CSS Color Module Level 3 › opacity - http://www.w3.org/TR/css3-color/#transparency
+MSDN › Alpha Filter - http://msdn.microsoft.com/en-us/library/ms532967(VS.85).aspx
+3.3.6 _ box-shadow
+둘째아들 정이든  둘째아들 정이든  둘째아들 정이든
+
+filter:progid:DXImageTransform.Microsoft.Shadow(color=silver,direction=135, strength=10);
+box-shadow:10px 10px 10px silver inset;
+box-shadow:x_offset y_offset blur_radius color
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러6~11
+
+값은 'X좌표, Y좌표, blur값, 그림자색' 순으로 선언한다. blur 값은 생략할 수 있는데 생략하는 경우 기본값은 blur 스타일이 전혀 지정되지 않은 '0'이다. IE 6~8 브라우저는 Shadow Filter를 적용할 수 있으나 그림자를 한 방향으로만 표현할 수 있고 사방으로 표현할 수 없는 제약이 따른다. inset 값을 추가하면 그림자가 상자 안쪽으로 발생하는데 IE 6~8 브라우저에 대응하는 filter는 이런 표현은 불가능하다.
+
+문법
+Name:	box-shadow
+Value:	none | <shadow> [ , <shadow> ]*
+Initial:	none
+Applies to:	all elements
+Inherited:	no
+Percentages:	N/A
+Media:	visual
+Computed value:	any <length> made absolute; any color computed; otherwise as specified
+CSS Backgrounds and Borders Module Level 3 › box-shadow - http://www.w3.org/TR/css3-background/#the-box-shadow
+MSDN › Shadow Filter - http://msdn.microsoft.com/en-us/library/ms533086(v=VS.85).aspx
+3.3.7 _ border-radius
+ 
+
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러9~11
+
+border-radius:30px; 
+border-radius:30px 0;
+네 방향 모두 적용하는 경우와 좌상단-우하단만 적용하는 경우.
+
+문법
+Name:	border-radius
+Value:	[ <length> | <percentage> ]{1,4} [ / [ <length> | <percentage> ]{1,4} ]?
+Initial:	0
+Applies to:	all elements, except table element when 'border-collapse' is 'collapse'
+Inherited:	no
+Percentages:	Refer to corresponding dimension of the border box.
+Media:	visual
+Computed value:	see individual properties
+CSS Backgrounds and Borders Module Level 3 › border-radius - http://www.w3.org/TR/css3-background/#the-border-radius
+3.3.8 _ background(s)
+background:
+url(bg1.gif) no-repeat left top, 
+url(bg2.gif) no-repeat right top, 
+url(bg3.gif) no-repeat left bottom, 
+url(bg4.gif) no-repeat right bottom;
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러9~11
+
+하나의 요소에 배경 이미지 이런 배경 이미지가 4번 적용되었다. 속성의 값을 쉼표(,)로 분리하면 배경 이미지의 사용 횟수를 무한대로 늘릴 수 있다.
+
+문법
+Name:	background
+Value:	[ <bg-layer> , ]* <final-bg-layer>
+Initial:	see individual properties
+Applies to:	all elements
+Inherited:	no
+Percentages:	see individual properties
+Media:	visual
+Computed value:	see individual properties
+CSS Backgrounds and Borders Module Level 3 › background - http://www.w3.org/TR/css3-background/#background
+3.3.9 _ gradient
+filter:progid:DXImageTransform.Microsoft.gradient(startColorStr=#3EAF0E, endColorStr=#ffffff);
+background:#3EAF0E -webkit-linear-gradient(top, #3EAF0E, #fff);
+background:#3EAF0E -moz-linear-gradient(top, #3EAF0E, #fff);
+background:#3EAF0E -o-linear-gradient(top, #3EAF0E, #fff);
+background:#3EAF0E linear-gradient(to bottom, #3EAF0E, #fff);
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러6~11
+
+선형 그라디언트는 '그라디언트 시작점, 시작색, 종료색' 순으로 선언한다. gradients를 지원하지 않는 브라우저를 위하여 기본 배경색을 지정해두어야 함에 유의한다. IE는 IE 전용 Gradient Filter를 사용한다.
+
+Safari CSS Visual Effects Guide › Using Gradients - https://developer.apple.com/library/safari/#documentation/InternetWeb/Conceptual/SafariVisualEffectsProgGuide/Gradients/Gradient.html
+Mozila Developer Center › -moz-linear-gradient - https://developer.mozilla.org/en/CSS/-moz-linear-gradient
+MSDN › Gradient Filter - http://msdn.microsoft.com/en-us/library/ms532997(v=VS.85).aspx
+3.3.10 _ transform
+아이폰4
+
+Sold OutiPhone 4
+filter:progid:DXImageTransform.Microsoft.Matrix(M11=6.123031769111886e-17, M12=-1, M21=1, M22=6.123031769111886e-17, sizingmethod='auto expand');
+-o-transform:rotate(90deg);-o-transform-origin:0 100%; 
+-moz-transform:rotate(90deg);-moz-transform-origin:0 100%;
+-webkit-transform:rotate(90deg);-webkit-transform-origin:0 100%;
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러6~11
+
+시계 방향으로 90도 회전시키는 코드. translate(이동), scale(크기), rotate(회전), skew(비틀기)가 가능하다. transform-oriain 속성은 transform의 축을 지정하는 속성으로써 값은 기본 값이 50%(X축) 50%(Y축) 이기 때문에 기본 값을 따르는 경우 생략할 수 있다. IE의 경우 IE 전용 Matrix Filter를 사용할 수 있으나 사용법이 다소 복잡하다.
+
+transform 문법
+Name:	transform
+Value:	none | <transform-function> [ <transform-function> ]*
+Initial:	none
+Applies to:	block-level and inline-level elements
+Inherited:	no
+Percentages:	refer to the size of the element's box
+Media:	visual
+Computed value:	Same as specified value.
+transform-origin 문법
+Name:	transform-origin
+Value:	[ [ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]? ] | [ [ left | center | right ] || [ top | center | bottom ] ]
+Initial:	50% 50%
+Applies to:	block-level and inline-level elements
+Inherited:	no
+Percentages:	refer to the size of the element's box
+Media:	visual
+Computed value:	For <length> the absolute value, otherwise a percentage
+CSS 2D Transforms Module Level 3 › transform - http://www.w3.org/TR/css3-2d-transforms/#transform-property
+MSDN › Matrix Filter - http://msdn.microsoft.com/en-us/library/ms533014(v=VS.85).aspx
+3.3.11 _ transition
+Menu1Menu2Menu3Menu4Menu5
+a:link{color:blue;
+  -webkit-transition:0.2s;
+  -moz-transition:0.2s;
+  -o-transition:0.2s; 
+  transition:0.2s; 
+}
+a:hover{color:red;}
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러10~11
+
+메뉴 버튼에 마우스를 올리면 플래시 메뉴와 같은 부드러운 움직임이 발생한다. transition 속성의 값으로는 어떤 속성을 몇 초간 진행할 것인지 정의한다. 어떤 속성을 transition 할 것인지 지정하지 않으면 기본 값 all이 지정되어 모든 속성을 transition 시킨다. 파이어폭스 브라우저는 3.7 버전부터 지원을 기대할 수 있다.
+
+문법
+Name:	transition
+Value:	[<'transition-property'> || <'transition-duration'> || <'transition-timing-function'> || <'transition-delay'> [, [<'transition-property'> || <'transition-duration'> || <'transition-timing-function'> || <'transition-delay'>]]*
+Initial:	see individual properties
+Applies to:	all elements, :before and :after pseudo elements
+Inherited:	no
+Percentages:	N/A
+Media:	interactive
+Computed value:	Same as specified value.
+CSS Transitions Module Level 3 › transition - http://www.w3.org/TR/css3-transitions/#the-transition-shorthand-property-
+3.3.12 _ animation
+animation?
+
+.ani{
+  animation:ANIMATION infinite 1s linear;
+  -webkit-animation:ANIMATION infinite 1s linear;
+  -moz-animation:ANIMATION infinite 1s linear;
+  -o-animation:ANIMATION infinite 1s linear;
+}
+
+@-webkit-keyframes ANIMATION{
+  from{ -webkit-transform:rotate(0deg);} 
+  to{-webkit-transform:rotate(360deg);} 
+} 
+@-moz-keyframes ANIMATION{
+  from{ -moz-transform:rotate(0deg);} 
+  to{-moz-transform:rotate(360deg);} 
+} 
+@-o-keyframes ANIMATION{
+  from{ -o-transform:rotate(0deg);} 
+  to{-o-transform:rotate(360deg);} 
+} 
+@keyframes ANIMATION{
+  from{ transform:rotate(0deg);} 
+  to{ transform:rotate(360deg);} 
+} 
+지원 브라우저 :  크롬  사파리  파이어폭스  오페라  인터넷익스플로러10~11
+
+'ANIMATION' 이라는 사용자 정의 에니메이션이 실행 된다. 일정한(linear) 속도로 1초(1s)에 한 바퀴(0~360deg)씩 영원히(infinite) 돌게 된다.
+
+문법
+Name:	animation
+Value:	[<animation-name> || <animation-duration> || <animation-timing-function> || <animation-delay> || <animation-iteration-count> || <animation-direction>] [, [<animation-name> || <animation-duration> || <animation-timing-function> || <animation-delay> || <animation-iteration-count> || <animation-direction>] ]*
+Initial:	see individual properties
+Applies to:	block-level and inline-level elements
+Inherited:	no
+Percentages:	N/A
+Media:	visual
+Computed value:	Same as specified value.
+CSS Animations Module Level 3 › animation - http://www.w3.org/TR/css3-animations/#the-animation-shorthand-property-
+3.4 _ CSS3 명세 읽는 법
+CSS3 명세 읽는 법
+용어	해설
+Value	유효한 값 또는 문법
+Initial	기본 값 (값을 지정하지 않은 경우의)
+Applies to	속성을 적용할 수 있는 요소 (block, inline, inline-block ... all elements)
+Inherited	속성이 자손에게 상속 되는지의 여부 (yes, no)
+Percentage	퍼센티지 값을 적용할 수 있는지의 여부 (N/A 는 not applicable 또는 not available 으로써 적용할 수 없다는 의미)
+Media	어떤 미디어 그룹에 적용할 수 있는 속성인지의 여부 (visual, interactive ...)
+Computed value	절대 값이 어떻게 계산 되는지
+<...>	포함되는 데이터 유형을 변수 형식으로 설명 (예를 들면 <length>, <percentage>)
+a b	공백으로 분리되어 나열된 값들은 모든 값이 반드시 필요하고 순서를 지켜야 한다
+|	둘 이상의 값이 이것으로 분리되어 있으면 하나의 값은 반드시 필요하고 하나만 필요하다
+||	둘 이상의 값이 이것으로 분리되어 있으면 하나 또는 하나 이상 반드시 필요하고 순서는 지키지 않아도 된다
+&&	둘 이상의 값이 이것으로 분리되어 있으면 모든 값이 반드시 필요하고 순서는 지키지 않아도 된다
+[...]	값을 그룹핑 한다
+*	선행되는 유형의 값은 생략하거나 한 번 이상 등장할 수 있다
++	선행되는 유형의 값은 반드시 필요하고 한 번 이상 필요하다
+?	선행되는 유형의 값은 생략하거나 한 번만 필요하다
+{a,b}	선행되는 유형의 값은 적어도 'a' 번 필요하고 최대한 'b' 번 필요하다. (예를 들면 border-color 속성의 Value는 <color>{1,4} 이다)
+(...)	인용부호 밖에 있는 괄호는 값의 묶음을 위해 사용되므로 문자 그대로 출력해야 한다 (예 background:url(...);)
+/	인용부호 밖에 있는 슬러시는 값의 연결을 위해 사용되므로 문자 그대로 출력해야 한다 (예 font:12px/1.2 Sans-serif;)
+,	인용부호 밖에 있는 쉼표는 값의 연결을 위해 사용되므로 문자 그대로 출력해야 한다 (예 font-family:Tahoma, Geneva, sans-serif;)
+3.5 _ CSS3 FAQ
+3.5.1 _ CSS3는 언제 지원 되나?
+CSS의 경우 공식 표준(de jure standard) 보다 사실 표준(de facto standard)이 더욱 의미가 있다. 그 이유는 현존하는 웹 브라우저들이 권고 후보(CR:Candidate Recommendation) 단계에 머물러 있는 CSS 2.1 명세의 대부분을 이미 잘 지원하고 있기 때문. CSS 2.1은 공식 표준(REC:Recommendation)이 되기 위하여 권고 제의(PR:Proposed Recommendation) 라는 단계를 한 번 더 거쳐야 하지만 이미 현실 세계에서는 사실상의 표준이 되어 있는 셈이다. 따라서 CSS3가 공식 표준이 될 때까지 기다릴 필요가 없다. 웹 브라우저들이 지원하기만 한다면 CSS3의 새로운 기술 명세를 현재의 실무에 즉시 적용할 수 있다. 이미 현존하는 최신 웹 브라우저들은 앞다투어 CSS3의 유용한 명세들을 지원하기 시작했다.
+
+3.5.2 _ CSS3를 사용하면 이를 잘 지원하지 못하는 하위 버전 브라우저를 선택한 사용자를 차별하는 것이 아닌가?
+전혀 그렇지 않다. CSS는 HTML 문서의 화면 표시 스타일을 기술하는 언어로써 HTML 구조를 변경하거나 의미를 교정하는 언어가 아니다. 따라서 CSS는 의도하지 않은 상황에서도 자연스럽게 우아한 낮춤(Graceful Degradation)과 점진적 향상(Progressive Enhancement) 원칙에 충실하다. 최신 웹 브라우저를 선택한 사용자에게는 더 세련되고 화려하면서 역동적인 모습을 보여줄 것이다. 그러나 오래된 웹 브라우저를 선택한 사용자도 HTML 문서를 읽거나 듣는데 전혀 문제가 되지 않는다. 이것은 상호 운용성(interoperability) 또는 웹 접근성(web accessibility)의 어느 측면에서 보더라도 차별에 해당하지 않는다. 더 좋은 도구를 선택한 사용자에게 더 좋은 사용자 경험을 제공하는 것은 당연한 이치로써 이것은 차별을 의미하지 않는다.
+
+3.5.3 _ CSS3를 사용하면 CSS 문법 유효성 검사를 만족할 수 없지 않나?
+그렇다. CSS3를 사용하면 CSS 문법 유효성 검사를 만족시킬 수 없다. 그러나 그것은 문제가 되지 않는다. CSS 문법 유효성 검사 결과는 현실 세계에서 중요하지 않다. CSS의 사용에 있어서 중요한 것은 사실상의 표준이고 이것은 현존하는 웹 브라우저들의 지원 여부에 따른다. 만약 누군가 CSS의 문법 유효성을 완벽하게 지켜야 한다고 주장한다면 W3C 웹 사이트의 CSS 소스 코드를 열어보라고 권해줄 수 있다. W3C 공식 웹사이트(w3.org)는 이미 CSS3 속성을 사용하여 그래픽 이미지를 최소화 하면서도 웹 페이지를 화려하게 디자인 했다. CSS3를 지원하지 않는 IE 브라우저 사용자에게는 조금씩 다르게 보이는 디자인이 존재한다. 그러나 누구도 W3C가 IE 브라우저 사용자를 차별했다고 말하지는 않는다.
+
+3.5.4 _ CSS3의 명세를 지금부터 공부해야 하나?
+2010년 현재 CSS3는 아직 모든 명세가 확정되지 않았고 웹 브라우저들이 모든 명세를 잘 지원하는 것도 아니다. 따라서 최신 브라우저에서 지원하는 유용한 몇 가지 속성들을 먼저 사용해보면서 자연스럽게 점진적으로 익혀가는 것이 좋다. 또한 CSS2 버전에서 지원하던 거의 모든 속성과 선택자 사용법을 계승하고 있기 때문에 새 표준에서 추가된 명세들 가운데 브라우저들이 지원하는 명세들을 먼저 익히면 된다. 여러분이 CSS를 처음 배울때에도 아마 이런 방식으로 접근했을 것이다.
+
+3.5.5 _ CSS3 명세가 갑자기 바뀌면 어떻게 하나?
+CSS3 명세가 바뀌는 것은 중요한 사실이 아니다. 웹 브라우저가 바뀐 CSS3 명세를 지원하는지의 여부가 중요하다. 보통의 웹 브라우저들은 하위 호환성을 중요하게 여기기 때문에 새 표준을 수용하면서 낡은 명세의 지원을 차단해 버리는 어리석은 일은 하지 않을 것이다. 예를 들어 CSS3 명세는 상자의 한 쪽 귀퉁이에 둥근 모서리 효과를 지정할 때 border-top-left-radius 라는 속성을 사용할 것을 제시하고 있지만 파이어폭스 브라우저는 둥근 모서리를 표현할 때 -moz-border-radius-topleft 라는 속성을 사용해야 한다. 만약 border-top-left-radius 속성이 최종 권고안으로 확정 되더라도 파이어폭스 브라우저는 -moz-border-radius-topleft 속성의 지원을 멈추지 않을 것이다.
+
+3.5.6 _ CSS3 명세를 보면서 공부했지만 대부분의 브라우저들이 지원하지 않는것 같다.
+지원하지 않는 것이 아니라 사용 방법이 조금 다를 뿐이다. 웹 브라우저들은 CSS3 명세를 지원하지만 미처 발견하지 못했던 매우 특이한 경우의 문제점이나 개선 사항을 수집하기 위해 보다 안전한 방법으로 CSS3를 지원하는 방법을 선택했다. 그것이 바로 벤더 확장(Vendor Extensions) 속성이다. 벤더 확장 속성이란 CSS 속성 앞에 벤더 표시를 위한 접두사(prefix)를 붙인 상태의 속성 표기법이다. 오페라 브라우저는 -o-, 파이어폭스는 -moz-, 웹킷 엔진을 사용하는 사파리와 크롬은 -webkit- 이라는 접두사를 붙임으로써 현재 지원하는 속성이 공식적인 표준과 다를 수 있고 변경의 여지가 있을 수 있다는 점을 암시하고 있다. 예를 들면 CSS3의 box-shadow 속성을 작성할 때 파이어폭스는 -moz-box-shadow 라고 작성해야 한다. 파이어폭스가 이 속성을 공식 지원하기 시작한다면 box-shadow와 -moz-box-shadow 표기법을 병행 지원 할 것이다. 다른 벤더들도 마찬가지다.
+
+3.5.7 _ 우리 고객들은 IE 브라우저에서도 CSS3 기법들이 적용되길 원한다.
+안타깝게도 현재(IE8) 및 하위 버전의 IE 브라우저는 CSS3를 지원하지 않는다. IE9 부터 HTML5와 함께 CSS3를 지원할 계획이 발표되었고 IE9 브라우저는 Windows Vista, Windows 7 이후의 운영체제에만 설치 가능하다. IE9 브라우저는 아직(2010년 7월 현재) 공식 출시일을 밝힌 적이 없지만 빠르면 2011년에 출시가 될 것으로 전망하고 있다. CSS3가 최신 기술이기 때문에 하위 버전의 브라우저에서 똑같이 구현하려면 그래픽 이미지 또는 자바스크립트를 추가로 사용해야 한다. 때문에 무리하게 적용하는 경우 웹 페이지의 성능을 떨어뜨리는 결과를 감수해야 한다. 평균적으로 웹 페이지 로딩 속도의 80%는 이미지와 자바스크립트를 내려받는데 소요된다. 트래픽이 높은 웹 사이트 일수록 이러한 성능 문제는 치명적으로 작용하기 때문에 낮은 버전의 웹 브라우저에는 우아한 낮춤 전략으로 접근하는 것이 좋다. 예를 들면 낮은 버전의 웹 브라우저에서는 둥근 모서리 대신 각진 모서리 표현을 사용하는 것이다. 이것은 고객이나 디자이너의 욕심을 포기하라는 의미가 아니라 성능과 타협할 수 있도록 합의를 이끌어야 한다는 뜻이다. 결과적으로 모든 사용자들에게 높은 성능을 제공할 수 있고 최신 웹 브라우저를 선택한 사용자에게는 보다 향상된 경험을 제공할 수 있다. 낡은 브라우저 때문에 계속해서 시대에 뒤떨어진 낡은 기술만을 사용해야 한다면 향상된 경험도 제공할 수 없게 된다.
+
+3.6 _ 참고자료
+W3C Standards & Draft
+About the CSS 2.1 Specification - http://www.w3.org/TR/CSS21/about.html
+CSS3.info - http://www.css3.info/
+CSS3 Working Group Editor's Draft - http://dev.w3.org/csswg/
+Selectors Level 3 - http://www.w3.org/TR/css3-selectors/
+CSS Text Level 3 - http://www.w3.org/TR/css3-text/
+CSS Fonts Module Level 3 - http://www.w3.org/TR/css3-fonts/
+CSS Color Module Level 3 - http://www.w3.org/TR/css3-color/
+CSS Backgrounds and Borders Module Level 3 - http://www.w3.org/TR/css3-background/
+CSS 2D Transforms Module Level 3 - http://www.w3.org/TR/css3-2d-transforms/
+CSS 3D Transforms Module Level 3 - http://www.w3.org/TR/css3-3d-transforms/
+CSS Transitions Module Level 3 - http://www.w3.org/TR/css3-transitions/
+CSS Animations Module Level 3 - http://www.w3.org/TR/css3-animations/
+ALL STANDARDS AND DRAFTS › CSS - http://www.w3.org/TR/#tr_CSS
+Safari CSS Reference - http://developer.apple.com/safari/library/documentation/AppleApplications/Reference/SafariCSSRef/Introduction.html
+Mozilla CSS Extensions - https://developer.mozilla.org/en/CSS_Reference/Mozilla_Extensions
+Opera Web specifications support - http://www.opera.com/docs/specs/
+MSDN › Cascading Style Sheets - http://msdn.microsoft.com/en-us/library/ms531205(v=vs.85).aspx
+MSDN › Visual Filters and Transitions Reference - http://msdn.microsoft.com/en-us/library/ms532853(v=VS.85).aspx
+이 저작물은 크리에이티브 커먼즈의 3.0 라이센스(저작자표시, 비영리, 변경금지)에 따라 이용하실 수 있습니다.
+
+정찬명 - http://naradesign.net/
